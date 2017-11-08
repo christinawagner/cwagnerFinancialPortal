@@ -1,0 +1,15 @@
+﻿@using cwagnerFinancialPortal.Extensions
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><a href="@Url.Action("Index", "Household")">@User.Identity.GetHouseholdName() Household</a></h4>
+            </div>
+        </div>
+    </div>
+</div>

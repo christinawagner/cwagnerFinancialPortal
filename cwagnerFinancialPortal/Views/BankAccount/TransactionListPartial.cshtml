@@ -1,0 +1,58 @@
+﻿@model IEnumerable<cwagnerFinancialPortal.Models.Transaction.TransactionViewModel>
+
+@{
+    ViewBag.Title = "TransactionPartialView";
+}
+
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsReconciled)
+        </th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Date.ToString("d")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsReconciledString)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTransactionModal", new { id = item.Id }, new { data_target="#modal", data_toggle ="modal", data_remote = "true" }) |
+                @Html.ActionLink("Void", "DeleteTransactionModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })
+            </td>
+        </tr>
+    }
+</tbody>

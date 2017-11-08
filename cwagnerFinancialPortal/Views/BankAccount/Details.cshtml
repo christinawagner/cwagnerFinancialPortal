@@ -1,0 +1,41 @@
+﻿@model cwagnerFinancialPortal.Models.BankAccount.BankAccountDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">@Model.Name</h4>
+                <h6 class="card-subtitle">@Model.Balance</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Transactions</h4>
+                <h6 class="card-subtitle">@Html.ActionLink("Add Transaction", "CreateTransactionModal", new { id = Model.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</h6>
+                <div class="table-responsive m-t-40">
+                    <table id="transactionTable" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        @Html.Action("TransactionListPartial", new { Model = Model.Transactions })
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#transactionTable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+}

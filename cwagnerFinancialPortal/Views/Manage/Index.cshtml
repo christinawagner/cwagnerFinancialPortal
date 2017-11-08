@@ -1,0 +1,81 @@
+﻿@model cwagnerFinancialPortal.Models.IndexViewModel
+@using cwagnerFinancialPortal.Extensions;
+
+@{
+    ViewBag.Title = "Manage";
+}
+
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <center class="m-t-30">
+                    @if (string.IsNullOrWhiteSpace(User.Identity.ProfilePicture()))
+                    {
+                        <img src="~/assets/profilePics/StormTrooper.jpeg" class="img-circle" width="150" />
+                    }
+                    else
+                    {
+                        <img src="@User.Identity.ProfilePicture()" class="img-circle" width="150" />
+                    }
+                    <h4 class="card-title m-t-10">@User.Identity.GetFullName()</h4>
+                </center>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <h4 class="card-title">Edit Profile</h4>
+                        <dl class="dl-horizontal">
+                            <dt>Name:</dt>
+                            <dd>@User.Identity.GetFullName()</dd>
+                            <dd>
+                                [
+                                @Html.ActionLink("Change your name", "ChangeName")
+                                ]
+                            </dd>
+                            <dt>Email:</dt>
+                            <dd>@User.Identity.Name</dd>
+                            <dt>Password:</dt>
+                            <dd>
+                                [
+                                @if (Model.HasPassword)
+                                {
+                                    @Html.ActionLink("Change your password", "ChangePassword")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Create", "SetPassword")
+                                }
+                                ]
+                            </dd>
+                            <dt>Change Photo:</dt>
+                            <dd>
+                                @using (Html.BeginForm("AddProfilePic", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input name="profilePic" type="file" class="form-control" />
+                                    @Html.ValidationMessage("ProfilePic", new { @class = "" })
+                                    <div class="price-row">
+                                        <button class="btn btn-success waves-effect waves-light m-t-20" type="submit">Submit</button>
+                                    </div>
+                                }
+                            </dd>
+                            @*<dt>External Logins:</dt>
+                                <dd>
+                                    @Model.Logins.Count [
+                                    @Html.ActionLink("Manage", "ManageLogins") ]
+                                </dd>*@
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

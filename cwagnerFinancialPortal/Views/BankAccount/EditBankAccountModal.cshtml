@@ -1,0 +1,21 @@
+﻿@model cwagnerFinancialPortal.Models.BankAccount.EditBankAccountViewModel
+
+@using (Html.BeginForm("Edit", "BankAccount", FormMethod.Post))
+{
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Edit this account</h4>
+    </div>
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(e => Model.Id)
+        <div class="form-group">
+            <label for="account-name" class="control-label">Account Name:</label>
+            @Html.EditorFor(e => Model.Name)
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger waves-effect waves-light">Save changes</button>
+    </div>
+}
