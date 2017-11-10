@@ -196,6 +196,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\BudgetController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseholdController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -211,6 +213,16 @@
     <Compile Include="Models\BankAccount\CreateBankAccountViewModel.cs" />
     <Compile Include="Models\BankAccount\DeleteBankAccountViewModel.cs" />
     <Compile Include="Models\BankAccount\EditBankAccountViewModel.cs" />
+    <Compile Include="Models\Budget\BudgetIndexViewModel.cs" />
+    <Compile Include="Models\Budget\BudgetViewModel.cs" />
+    <Compile Include="Models\Budget\CreateBudgetViewModel.cs" />
+    <Compile Include="Models\Budget\DeleteBudgetViewModel.cs" />
+    <Compile Include="Models\Budget\EditBudgetViewModel.cs" />
+    <Compile Include="Models\Category\CategoryIndexViewModel.cs" />
+    <Compile Include="Models\Category\CategoryViewModel.cs" />
+    <Compile Include="Models\Category\CreateCategoryViewModel.cs" />
+    <Compile Include="Models\Category\DeleteCategoryViewModel.cs" />
+    <Compile Include="Models\Category\EditCategoryViewModel.cs" />
     <Compile Include="Models\Household\CreateHouseholdViewModel.cs" />
     <Compile Include="Models\Household\HouseholdIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -4195,6 +4207,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Budget\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

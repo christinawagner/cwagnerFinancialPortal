@@ -1,19 +1,26 @@
 namespace cwagnerFinancialPortal.Domain.Migrations
 {
-    using System;
-    using System.Data.Entity;
+    using cwagnerFinancialPortal.Domain.Categories;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<cwagnerFinancialPortal.Domain.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(cwagnerFinancialPortal.Domain.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
+            context.Categories.AddOrUpdate(
+                c => c.Name,
+                new Category { Name = DefaultCategories.Adjustment },
+                new Category { Name = DefaultCategories.Entertainment },
+                new Category { Name = DefaultCategories.Food },
+                new Category { Name = DefaultCategories.Gas },
+                new Category { Name = DefaultCategories.Income },
+                new Category { Name = DefaultCategories.Other }
+                );
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

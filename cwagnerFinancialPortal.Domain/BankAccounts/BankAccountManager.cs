@@ -1,4 +1,5 @@
-﻿using cwagnerFinancialPortal.Domain.Transactions;
+﻿using cwagnerFinancialPortal.Domain.Categories;
+using cwagnerFinancialPortal.Domain.Transactions;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -7,7 +8,12 @@ namespace cwagnerFinancialPortal.Domain.BankAccounts
 {
     public class BankAccountManager
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+
+        public BankAccountManager(ApplicationDbContext dbContext)
+        {
+            db = dbContext;
+        }
 
         public BankAccount Get(int id)
         {
@@ -21,13 +27,15 @@ namespace cwagnerFinancialPortal.Domain.BankAccounts
 
         public int Add(BankAccount bankAccount)
         {
+            var adjustmentCategory = db.Categories.Single(c => c.Name == DefaultCategories.Adjustment);
             var initialTransaction = new Transaction
             {
                 Amount = bankAccount.Balance,
                 Type = bankAccount.Balance >= 0 ? TransactionType.Credit : TransactionType.Debit,
                 Date = DateTimeOffset.Now,
                 IsReconciled = true,
-                Description = "Initial Account Balance"
+                Description = "Initial Account Balance",
+                CategoryId = adjustmentCategory.Id
             };
             bankAccount.Transactions.Add(initialTransaction);
             db.BankAccounts.Add(bankAccount);

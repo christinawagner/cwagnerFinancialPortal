@@ -7,12 +7,23 @@ using System.Linq;
 using cwagnerFinancialPortal.Domain.Transactions;
 using cwagnerFinancialPortal.Models.Transaction;
 using System.Collections.Generic;
+using cwagnerFinancialPortal.Domain.Categories;
+using cwagnerFinancialPortal.Domain;
 
 namespace cwagnerFinancialPortal.Controllers
 {
     public class BankAccountController : Controller
     {
-        private readonly BankAccountManager _manager = new BankAccountManager();
+        private readonly ApplicationDbContext _db;
+        private readonly CategoryManager _categoryManager;
+        private readonly BankAccountManager _manager;
+
+        public BankAccountController()
+        {
+            _db = new ApplicationDbContext();
+            _categoryManager = new CategoryManager(_db);
+            _manager = new BankAccountManager(_db);
+        }
 
         // GET: BankAccount
         public ActionResult Index()
@@ -41,7 +52,8 @@ namespace cwagnerFinancialPortal.Controllers
                 Date = t.Date,
                 Amount = t.Amount,
                 Description = t.Description,
-                CategoryName = t.Category.GetFriendlyName(),
+                CategoryName = t.Category.Name,
+                CategoryId = t.CategoryId,
                 Type = t.Type,
                 IsReconciled = t.IsReconciled
             }).ToList();
@@ -115,7 +127,14 @@ namespace cwagnerFinancialPortal.Controllers
 
         public PartialViewResult CreateTransactionModal(int id)
         {
-            return PartialView(new CreateTransactionViewModel { BankAccountId = id });
+            var householdId = User.Identity.GetHouseholdId().Value;
+            var availableCategories = _categoryManager.GetAll(householdId).ToList();
+            var model = new CreateTransactionViewModel
+            {
+                BankAccountId = id,
+                CategorySelectList = new SelectList(availableCategories, "Id", "Name")
+            };
+            return PartialView(model);
         }
 
         //POST: CREATE Transaction
@@ -125,14 +144,16 @@ namespace cwagnerFinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
-                _manager.AddTransaction(new Transaction {
+                _manager.AddTransaction(new Transaction
+                {
                     BankAccountId = model.BankAccountId,
                     Date = model.Date,
                     Amount = model.Amount,
                     Description = model.Description,
                     Type = model.Type,
-                    Category = model.Category,
-                    IsReconciled = model.IsReconciled });
+                    CategoryId = model.CategoryId,
+                    IsReconciled = model.IsReconciled
+                });
             }
             return RedirectToAction("Details", new { id = model.BankAccountId });
         }
@@ -144,6 +165,9 @@ namespace cwagnerFinancialPortal.Controllers
 
         public PartialViewResult EditTransactionModal(int id)
         {
+            var householdId = User.Identity.GetHouseholdId().Value;
+            var availableCategories = _categoryManager.GetAll(householdId).ToList();
+            
             var transaction = _manager.GetTransaction(id);
             var model = new EditTransactionViewModel
             {
@@ -152,8 +176,9 @@ namespace cwagnerFinancialPortal.Controllers
                 Type = transaction.Type,
                 Amount = transaction.Amount,
                 Description = transaction.Description,
-                Category = transaction.Category,
-                IsReconciled = transaction.IsReconciled
+                CategoryId = transaction.CategoryId,
+                IsReconciled = transaction.IsReconciled,
+                CategorySelectList = new SelectList(availableCategories, "Id", "Name", transaction.CategoryId)
             };
             return PartialView(model);
         }
@@ -170,11 +195,11 @@ namespace cwagnerFinancialPortal.Controllers
                 transaction.Type = model.Type;
                 transaction.Amount = model.Amount;
                 transaction.Description = model.Description;
-                transaction.Category = model.Category;
+                transaction.CategoryId = model.CategoryId;
                 transaction.IsReconciled = model.IsReconciled;
                 _manager.EditTransaction(transaction);
             }
-            return RedirectToAction("Details", new { id = transaction.BankAccountId});
+            return RedirectToAction("Details", new { id = transaction.BankAccountId });
         }
 
         public PartialViewResult DeleteTransactionModal(int id)

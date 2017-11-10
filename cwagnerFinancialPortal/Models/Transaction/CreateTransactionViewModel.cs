@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace cwagnerFinancialPortal.Models.Transaction
 {
@@ -13,7 +14,9 @@ namespace cwagnerFinancialPortal.Models.Transaction
         public decimal Amount { get; set; }
         public string Description { get; set; }
         public TransactionType Type { get; set; }
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public bool IsReconciled { get; set; }
+
+        public SelectList CategorySelectList { get; set; }
     }
 }

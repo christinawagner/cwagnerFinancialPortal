@@ -1,5 +1,6 @@
 ﻿using cwagnerFinancialPortal.Domain.BankAccounts;
 using cwagnerFinancialPortal.Domain.Budgets;
+using cwagnerFinancialPortal.Domain.Categories;
 using cwagnerFinancialPortal.Domain.Households;
 using cwagnerFinancialPortal.Domain.Transactions;
 using cwagnerFinancialPortal.Domain.Users;
@@ -25,5 +26,6 @@ namespace cwagnerFinancialPortal.Domain
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

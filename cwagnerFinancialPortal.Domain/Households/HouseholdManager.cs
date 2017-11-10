@@ -10,8 +10,12 @@ namespace cwagnerFinancialPortal.Domain.Households
 {
     public class HouseholdManager
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
 
+        public HouseholdManager(ApplicationDbContext dbContext)
+        {
+            db = dbContext;
+        }
         public Household Get(int id)
         {
             return db.Households.Find(id);

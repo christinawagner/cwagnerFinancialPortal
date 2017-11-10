@@ -58,6 +58,9 @@
     <Compile Include="BankAccounts\BankAccountManager.cs" />
     <Compile Include="Budgets\Budget.cs" />
     <Compile Include="Budgets\BudgetManager.cs" />
+    <Compile Include="Categories\DefaultCategories.cs" />
+    <Compile Include="Categories\Category.cs" />
+    <Compile Include="Categories\CategoryManager.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Households\Household.cs" />
     <Compile Include="Households\HouseholdInvite.cs" />

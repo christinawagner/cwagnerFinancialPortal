@@ -13,6 +13,7 @@ namespace cwagnerFinancialPortal.Models.Transaction
         public DateTimeOffset Date { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
+        public int CategoryId { get; set; }
         [Display(Name="Category")]
         public string CategoryName { get; set; }
         public TransactionType Type { get; set; }
