@@ -226,6 +226,8 @@
     <Compile Include="Models\Category\CreateCategoryViewModel.cs" />
     <Compile Include="Models\Category\DeleteCategoryViewModel.cs" />
     <Compile Include="Models\Category\EditCategoryViewModel.cs" />
+    <Compile Include="Models\Home\BankAccountOverdraftViewModel.cs" />
+    <Compile Include="Models\Home\OverdraftNotificationViewModel.cs" />
     <Compile Include="Models\Household\CreateHouseholdViewModel.cs" />
     <Compile Include="Models\Household\HouseholdIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -4219,6 +4221,7 @@
     <Content Include="Views\Budget\EditCategoryModal.cshtml" />
     <Content Include="Views\Budget\DeleteCategoryModal.cshtml" />
     <Content Include="Views\Budget\BudgetItemListPartial.cshtml" />
+    <Content Include="Views\Home\_OverdraftNotification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

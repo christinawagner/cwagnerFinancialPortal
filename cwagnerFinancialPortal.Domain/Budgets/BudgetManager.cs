@@ -54,6 +54,10 @@ namespace cwagnerFinancialPortal.Domain.Budgets
             var budget = db.Budgets.Find(id);
             if(budget != null)
             {
+                foreach(var item in budget.BudgetItems.ToList())
+                {
+                    db.BudgetItems.Remove(item);
+                }
                 db.Budgets.Remove(budget);
                 db.SaveChanges();
             }

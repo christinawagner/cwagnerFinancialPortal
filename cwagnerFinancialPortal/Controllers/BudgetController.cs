@@ -132,6 +132,7 @@ namespace cwagnerFinancialPortal.Controllers
             {
                 Id = budget.Id,
                 Duration = budget.Duration,
+                Total = budget.BudgetItems.Select(s => s.Amount).DefaultIfEmpty().Sum()
             };
             return PartialView(model);
         }
