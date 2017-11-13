@@ -201,7 +201,7 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">@User.Identity.GetHouseholdName() Household</li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-home-variant"></i><span class="hide-menu">@User.Identity.GetHouseholdName()</span></a>
+                            <a class="has-arrow" href="@Url.Action("Index", "Household")" aria-expanded="false"><i class="mdi mdi-home-variant"></i><span class="hide-menu">@User.Identity.GetHouseholdName()</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="@Url.Action("Index", "Household")">Household Home</a></li>
                                 <li><a href="#">Invite Member</a></li>
@@ -209,16 +209,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bank"></i><span class="hide-menu">Bank Accounts</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="@Url.Action("Index", "BankAccount")">View/Manage Accounts</a></li>
-                            </ul>
+                            <a class="has-arrow " href="@Url.Action("Index", "BankAccount")" aria-expanded="false"><i class="mdi mdi-bank"></i><span class="hide-menu">Bank Accounts</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-square-inc-cash"></i><span class="hide-menu">Budgets</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#" data-toggle="modal" data-target="addTransaction">Create New</a></li>
-                            </ul>
+                            <a class="has-arrow" href="@Url.Action("Index", "Budget")" aria-expanded="false"><i class="mdi mdi-square-inc-cash"></i><span class="hide-menu">Budgets</span></a>
                         </li>
                         @*<li class="nav-devider"></li>
                             <li class="nav-small-cap">FORMS, TABLE &amp; WIDGETS</li>

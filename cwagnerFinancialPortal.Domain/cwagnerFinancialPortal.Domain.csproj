@@ -57,6 +57,7 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="BankAccounts\BankAccountManager.cs" />
     <Compile Include="Budgets\Budget.cs" />
+    <Compile Include="Budgets\BudgetItem.cs" />
     <Compile Include="Budgets\BudgetManager.cs" />
     <Compile Include="Categories\DefaultCategories.cs" />
     <Compile Include="Categories\Category.cs" />

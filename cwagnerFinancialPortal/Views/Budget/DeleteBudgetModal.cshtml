@@ -1,0 +1,19 @@
+﻿@model cwagnerFinancialPortal.Models.Budget.DeleteBudgetViewModel
+
+<div class="modal-header">
+    <h4 class="modal-title" id="myModalLabel"><b>WARNING!</b></h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+</div>
+<div class="modal-body">
+    <h4>Are you sure you want to delete the @Model.Duration budget for @Model.Total?</h4>
+    <p>This budget and all of its items will be permanently deleted.</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+    @using (Html.BeginForm("Delete", "Budget", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(h => Model.Id)
+        <button type="submit" class="btn btn-danger waves-effect waves-light">Delete</button>
+    }
+</div>

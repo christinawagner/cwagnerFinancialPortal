@@ -60,11 +60,6 @@ namespace cwagnerFinancialPortal.Controllers
             return View(model);
         }
 
-        public PartialViewResult CreateBankAccountModal()
-        {
-            return PartialView();
-        }
-
         //POST: CREATE BankAccount
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -78,14 +73,9 @@ namespace cwagnerFinancialPortal.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public PartialViewResult EditBankAccountModal(int id)
+        public PartialViewResult CreateBankAccountModal()
         {
-            var account = _manager.Get(id);
-            var model = new EditBankAccountViewModel()
-            {
-                Name = account.Name
-            };
-            return PartialView(model);
+            return PartialView();
         }
 
         //POST: EDIT BankAccount
@@ -102,12 +92,11 @@ namespace cwagnerFinancialPortal.Controllers
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult DeleteBankAccountModal(int id)
+        public PartialViewResult EditBankAccountModal(int id)
         {
             var account = _manager.Get(id);
-            var model = new DeleteBankAccountViewModel
+            var model = new EditBankAccountViewModel()
             {
-                Id = account.Id,
                 Name = account.Name
             };
             return PartialView(model);
@@ -121,21 +110,20 @@ namespace cwagnerFinancialPortal.Controllers
             return RedirectToAction("Index");
         }
 
-        //======================
-        //-----TRANSACTIONS-----
-        //======================
-
-        public PartialViewResult CreateTransactionModal(int id)
+        public PartialViewResult DeleteBankAccountModal(int id)
         {
-            var householdId = User.Identity.GetHouseholdId().Value;
-            var availableCategories = _categoryManager.GetAll(householdId).ToList();
-            var model = new CreateTransactionViewModel
+            var account = _manager.Get(id);
+            var model = new DeleteBankAccountViewModel
             {
-                BankAccountId = id,
-                CategorySelectList = new SelectList(availableCategories, "Id", "Name")
+                Id = account.Id,
+                Name = account.Name
             };
             return PartialView(model);
         }
+
+        //======================
+        //-----TRANSACTIONS-----
+        //======================
 
         //POST: CREATE Transaction
         [HttpPost]
@@ -163,22 +151,14 @@ namespace cwagnerFinancialPortal.Controllers
             return PartialView(model);
         }
 
-        public PartialViewResult EditTransactionModal(int id)
+        public PartialViewResult CreateTransactionModal(int id)
         {
             var householdId = User.Identity.GetHouseholdId().Value;
             var availableCategories = _categoryManager.GetAll(householdId).ToList();
-            
-            var transaction = _manager.GetTransaction(id);
-            var model = new EditTransactionViewModel
+            var model = new CreateTransactionViewModel
             {
-                Id = transaction.Id,
-                Date = transaction.Date,
-                Type = transaction.Type,
-                Amount = transaction.Amount,
-                Description = transaction.Description,
-                CategoryId = transaction.CategoryId,
-                IsReconciled = transaction.IsReconciled,
-                CategorySelectList = new SelectList(availableCategories, "Id", "Name", transaction.CategoryId)
+                BankAccountId = id,
+                CategorySelectList = new SelectList(availableCategories, "Id", "Name")
             };
             return PartialView(model);
         }
@@ -202,14 +182,22 @@ namespace cwagnerFinancialPortal.Controllers
             return RedirectToAction("Details", new { id = transaction.BankAccountId });
         }
 
-        public PartialViewResult DeleteTransactionModal(int id)
+        public PartialViewResult EditTransactionModal(int id)
         {
+            var householdId = User.Identity.GetHouseholdId().Value;
+            var availableCategories = _categoryManager.GetAll(householdId).ToList();
+            
             var transaction = _manager.GetTransaction(id);
-            var model = new DeleteTransactionViewModel
+            var model = new EditTransactionViewModel
             {
                 Id = transaction.Id,
+                Date = transaction.Date,
+                Type = transaction.Type,
+                Amount = transaction.Amount,
                 Description = transaction.Description,
-                Amount = transaction.Amount
+                CategoryId = transaction.CategoryId,
+                IsReconciled = transaction.IsReconciled,
+                CategorySelectList = new SelectList(availableCategories, "Id", "Name", transaction.CategoryId)
             };
             return PartialView(model);
         }
@@ -221,6 +209,18 @@ namespace cwagnerFinancialPortal.Controllers
             var transaction = _manager.GetTransaction(id);
             _manager.DeleteTransaction(id);
             return RedirectToAction("Details", new { id = transaction.BankAccountId });
+        }
+
+        public PartialViewResult DeleteTransactionModal(int id)
+        {
+            var transaction = _manager.GetTransaction(id);
+            var model = new DeleteTransactionViewModel
+            {
+                Id = transaction.Id,
+                Description = transaction.Description,
+                Amount = transaction.Amount
+            };
+            return PartialView(model);
         }
     }
 }

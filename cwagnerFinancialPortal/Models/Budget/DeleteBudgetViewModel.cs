@@ -9,7 +9,7 @@ namespace cwagnerFinancialPortal.Models.Budget
     public class DeleteBudgetViewModel
     {
         public int Id { get; set; }
-        public decimal Total { get; set; }
+        public decimal Total { get; }
         public Duration Duration { get; set; }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<cwagnerFinancialPortal.Models.Budget.BudgetItemViewModel>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditBudgetItemModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" }) |
+                        @Html.ActionLink("Delete", "DeleteBudgetItemModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

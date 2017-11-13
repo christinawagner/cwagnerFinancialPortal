@@ -197,7 +197,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\BudgetController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HouseholdController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -213,12 +212,16 @@
     <Compile Include="Models\BankAccount\CreateBankAccountViewModel.cs" />
     <Compile Include="Models\BankAccount\DeleteBankAccountViewModel.cs" />
     <Compile Include="Models\BankAccount\EditBankAccountViewModel.cs" />
+    <Compile Include="Models\Budget\BudgetDetailsViewModel.cs" />
     <Compile Include="Models\Budget\BudgetIndexViewModel.cs" />
+    <Compile Include="Models\Budget\BudgetItemViewModel.cs" />
     <Compile Include="Models\Budget\BudgetViewModel.cs" />
+    <Compile Include="Models\Budget\CreateBudgetItemViewModel.cs" />
     <Compile Include="Models\Budget\CreateBudgetViewModel.cs" />
+    <Compile Include="Models\Budget\DeleteBudgetItemViewModel.cs" />
     <Compile Include="Models\Budget\DeleteBudgetViewModel.cs" />
+    <Compile Include="Models\Budget\EditBudgetItemViewModel.cs" />
     <Compile Include="Models\Budget\EditBudgetViewModel.cs" />
-    <Compile Include="Models\Category\CategoryIndexViewModel.cs" />
     <Compile Include="Models\Category\CategoryViewModel.cs" />
     <Compile Include="Models\Category\CreateCategoryViewModel.cs" />
     <Compile Include="Models\Category\DeleteCategoryViewModel.cs" />
@@ -4204,11 +4207,21 @@
     <Content Include="Views\BankAccount\EditBankAccountModal.cshtml" />
     <Content Include="Views\BankAccount\DeleteTransactionModal.cshtml" />
     <Content Include="Views\BankAccount\DeleteBankAccountModal.cshtml" />
+    <Content Include="Views\Budget\Index.cshtml" />
+    <Content Include="Views\Budget\CategoryListPartial.cshtml" />
+    <Content Include="Views\Budget\CreateBudgetModal.cshtml" />
+    <Content Include="Views\Budget\EditBudgetModal.cshtml" />
+    <Content Include="Views\Budget\DeleteBudgetModal.cshtml" />
+    <Content Include="Views\Budget\CreateBudgetItemModal.cshtml" />
+    <Content Include="Views\Budget\EditBudgetItemModal.cshtml" />
+    <Content Include="Views\Budget\DeleteBudgetItemModal.cshtml" />
+    <Content Include="Views\Budget\CreateCategoryModal.cshtml" />
+    <Content Include="Views\Budget\EditCategoryModal.cshtml" />
+    <Content Include="Views\Budget\DeleteCategoryModal.cshtml" />
+    <Content Include="Views\Budget\BudgetItemListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Budget\" />
-    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

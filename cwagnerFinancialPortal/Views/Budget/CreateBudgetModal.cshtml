@@ -1,23 +1,20 @@
-﻿@model cwagnerFinancialPortal.Models.BankAccount.CreateBankAccountViewModel
-@{
-    ViewBag.Title = "CreateBankAccountModalPartial";
-}
+﻿@model cwagnerFinancialPortal.Models.Budget.CreateBudgetViewModel
 
-@using (Html.BeginForm("Create", "BankAccount", FormMethod.Post))
+@using (Html.BeginForm("Create", "Budget", FormMethod.Post))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Add an account</h4>
+        <h4 class="modal-title">Add a budget</h4>
     </div>
     <div class="modal-body">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label for="account-name" class="control-label">Account Name:</label>
-            @Html.EditorFor(e => Model.Name)
+            <label for="budget-name" class="control-label">Budget Duration:</label>
+            @Html.EnumDropDownListFor(e => Model.Duration)
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Current Balance:</label>
-            @Html.EditorFor(e => Model.Balance)
+            <p>Your budget total will be automatically calculated once items have been created.</p>
+            <p>Click on the newly created budget to add budget categories and amounts.</p>
         </div>
     </div>
     <div class="modal-footer">

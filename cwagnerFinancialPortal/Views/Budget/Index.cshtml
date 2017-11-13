@@ -1,0 +1,45 @@
+﻿@model cwagnerFinancialPortal.Models.Budget.BudgetIndexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Budgets</h4>
+                        <h6 class="card-subtitle">@Html.ActionLink("Add Budget", "CreateBudgetModal", null, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @foreach (var item in Model.Budgets)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        @Html.DisplayFor(m => item.Total)
+                        @Html.DisplayFor(m => item.Duration)
+                    </h4>
+                    <h6 class="card-subtitle">
+                        @Html.ActionLink("Edit", "EditBudgetModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" }) |
+                        @Html.ActionLink("Delete", "DeleteBudgetModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" }) |
+                        @Html.ActionLink("Add Budget Item", "CreateBudgetItemModal", new { budgetId = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })
+                    </h6>
+                    @Html.Action("BudgetItemListPartial", new { Model = item.BudgetItems })
+                </div>`
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Budget Categories</h4>
+                <h6 class="card-subtitle">@Html.ActionLink("Add Category", "CreateCategoryModal", null, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</h6>
+                @Html.Action("CategoryListPartial", new { model = Model.Categories })
+            </div>
+        </div>
+    </div>
+</div>

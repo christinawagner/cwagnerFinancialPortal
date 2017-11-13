@@ -8,7 +8,6 @@ namespace cwagnerFinancialPortal.Models.Budget
 {
     public class CreateBudgetViewModel
     {
-        public decimal Total { get; set; }
         public Duration Duration { get; set; }
     }
 }

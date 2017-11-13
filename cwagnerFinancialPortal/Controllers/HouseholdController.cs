@@ -1,4 +1,5 @@
-﻿using cwagnerFinancialPortal.Domain.Households;
+﻿using cwagnerFinancialPortal.Domain;
+using cwagnerFinancialPortal.Domain.Households;
 using cwagnerFinancialPortal.Extensions;
 using cwagnerFinancialPortal.Models;
 using cwagnerFinancialPortal.Models.Household;
@@ -15,7 +16,14 @@ namespace cwagnerFinancialPortal.Controllers
     [Authorize]
     public class HouseholdController : Controller
     {
-        private readonly HouseholdManager _manager = new HouseholdManager();
+        private readonly ApplicationDbContext _db;
+        private readonly HouseholdManager _manager;
+
+        public HouseholdController()
+        {
+            _db = new ApplicationDbContext();
+            _manager = new HouseholdManager(_db);
+        }
 
         // GET: Household
         public ActionResult Index()

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<cwagnerFinancialPortal.Models.Category.CategoryViewModel>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead></thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @if (item.CanEdit)
+                        {
+                            @Html.ActionLink("Edit", "EditCategoryModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })
+                            <span> | </span>
+                            @Html.ActionLink("Delete", "DeleteCategoryModal", new { id = item.Id }, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

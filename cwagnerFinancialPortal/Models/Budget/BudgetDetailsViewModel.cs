@@ -1,12 +1,9 @@
 ﻿using cwagnerFinancialPortal.Domain.Budgets;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace cwagnerFinancialPortal.Models.Budget
 {
-    public class BudgetViewModel
+    public class BudgetDetailsViewModel
     {
         public int Id { get; set; }
         public decimal Total { get; set; }
