@@ -1,0 +1,17 @@
+﻿@using (Html.BeginForm("SendInvite", "Household", FormMethod.Post, new { @class = "form-material form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Invite Household Member</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="text" name="email" class="form-control" id="recipient-name" placeholder="New member's email address">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+        <button type="Submit" class="btn btn-danger waves-effect waves-light">Invite</button>
+    </div>
+}

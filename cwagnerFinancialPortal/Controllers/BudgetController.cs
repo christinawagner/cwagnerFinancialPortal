@@ -10,6 +10,8 @@ using System.Web.Mvc;
 
 namespace cwagnerFinancialPortal.Controllers
 {
+    [Authorize]
+    [RequireHttps]
     public class BudgetController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -62,7 +62,10 @@
     <Compile Include="Categories\DefaultCategories.cs" />
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\CategoryManager.cs" />
+    <Compile Include="Chart\Chart.cs" />
+    <Compile Include="Chart\ChartDataSet.cs" />
     <Compile Include="Email.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Households\Household.cs" />
     <Compile Include="Households\HouseholdInvite.cs" />
     <Compile Include="Households\HouseholdManager.cs" />
@@ -71,9 +74,7 @@
     <Compile Include="Transactions\Transaction.cs" />
     <Compile Include="Users\ApplicationUser.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Notifications\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

@@ -11,67 +11,10 @@ using cwagnerFinancialPortal.Domain;
 using System.Net.Mail;
 using System.Web.Configuration;
 using System.Net;
+using cwagnerFinancialPortal.Services;
 
 namespace cwagnerFinancialPortal
-{
-    public class EmailService : IIdentityMessageService
-    {
-        public async Task SendAsync(IdentityMessage message)
-        {
-            var GmailUsername = WebConfigurationManager.AppSettings["username"];
-            var GmailPassword = WebConfigurationManager.AppSettings["password"];
-            var host = WebConfigurationManager.AppSettings["host"];
-            int port = Convert.ToInt32(WebConfigurationManager.AppSettings["port"]);
-
-            using (var smtp = new SmtpClient()
-            {
-                Host = host,
-                Port = port,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(GmailUsername, GmailPassword)
-            })
-
-            using (var email = new MailMessage("FinancialPortal<FinancialPortalDONOTREPLY@email.com>",
-                   message.Destination)
-            {
-                Subject = message.Subject,
-                IsBodyHtml = true,
-                Body = message.Body
-            })
-            {
-                try
-                {
-                    await smtp.SendMailAsync(email);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    await Task.FromResult(0);
-                }
-            };
-        }
-
-        private SmtpClient GetClient()
-        {
-            var GmailUsername = WebConfigurationManager.AppSettings["username"];
-            var GmailPassword = WebConfigurationManager.AppSettings["password"];
-            var host = WebConfigurationManager.AppSettings["host"];
-            int port = Convert.ToInt32(WebConfigurationManager.AppSettings["port"]);
-
-            return new SmtpClient()
-            {
-                Host = host,
-                Port = port,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(GmailUsername, GmailPassword)
-            };
-        }
-    }
-
+{ 
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)

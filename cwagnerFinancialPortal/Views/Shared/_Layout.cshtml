@@ -20,6 +20,7 @@
     <link href="/horizontal/css/colors/default.css" id="theme" rel="stylesheet">
     <!--JQuery UI-->
     <link href="/assets/plugins/jqueryui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,7 +50,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Dashboard")">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -155,8 +156,9 @@
                         <li>
                             <a class="has-arrow" href="@Url.Action("Index", "Household")" aria-expanded="false"><i class="mdi mdi-home-variant"></i><span class="hide-menu">@User.Identity.GetHouseholdName()</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="@Url.Action("Index", "Household")">Household Home</a></li>
-                                <li><a href="#">Invite Member</a></li>
+                                <li><a href="@Url.Action("Index", "Dashboard")">Quick-view Dashboard</a></li>
+                                <li><a href="@Url.Action("Index", "Household")">Manage Household</a></li>
+                                <li>@Html.ActionLink("Invite Member", "InviteMemberModal", "Household", null, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</li>
                                 <li><a href="@Url.Action("Index", "Home")" data-toggle="modal" data-target="#leaveHousehold">Leave Household</a></li>
                             </ul>
                         </li>
@@ -226,6 +228,13 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                @if (!string.IsNullOrWhiteSpace(TempData["Message"] as string))
+                {
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                        @TempData["Message"]
+                    </div>
+                }
                 @Html.Action("OverdraftNotification", "Home")
                 @RenderBody()
                 <!-- ============================================================== -->

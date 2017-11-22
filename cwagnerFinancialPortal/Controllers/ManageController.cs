@@ -13,6 +13,7 @@ using System.Web.Helpers;
 namespace cwagnerFinancialPortal.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

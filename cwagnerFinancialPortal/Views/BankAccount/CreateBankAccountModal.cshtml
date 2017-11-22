@@ -3,7 +3,7 @@
     ViewBag.Title = "CreateBankAccountModalPartial";
 }
 
-@using (Html.BeginForm("Create", "BankAccount", FormMethod.Post))
+@using (Html.BeginForm("Create", "BankAccount", FormMethod.Post, new { @class = "form-material form-horizontal" }))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -12,12 +12,10 @@
     <div class="modal-body">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label for="account-name" class="control-label">Account Name:</label>
-            @Html.EditorFor(e => Model.Name)
+            <input class="form-control" type="text" name="@nameof(Model.Name)" required="" placeholder="Account Name">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Current Balance:</label>
-            @Html.EditorFor(e => Model.Balance)
+            <input class="form-control" type="number" name="@nameof(Model.Balance)" required="" placeholder="Current Balance">
         </div>
     </div>
     <div class="modal-footer">

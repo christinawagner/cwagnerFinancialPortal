@@ -1,6 +1,6 @@
 ﻿@model cwagnerFinancialPortal.Models.Transaction.EditTransactionViewModel
 
-@using (Html.BeginForm("EditTransaction", "BankAccount", FormMethod.Post))
+@using (Html.BeginForm("EditTransaction", "BankAccount", FormMethod.Post, new { @class = "form-material form-horizontal" }))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -10,23 +10,20 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(e => Model.Id)
         <div class="form-group">
-            <label for="message-text" class="control-label">Date of transaction:</label>
             <input class="form-control" name="@nameof(Model.Date)" id="datepicker" type="text" value="@Model.Date.ToString("d")">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Transaction type:</label>
+            <label for="message-text" class="control-label">Transaction type: </label>
             @Html.EnumDropDownListFor(model => model.Type)
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Amount</label>
-            @Html.EditorFor(X => Model.Amount)
+            <input class="form-control" type="text" name="@nameof(Model.Amount)" required="" value="@Model.Amount">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Description</label>
-            @Html.TextAreaFor(x => Model.Description)
+            <input class="form-control" type="text" name="@nameof(Model.Description)" required="" value="@Model.Description">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Category:</label>
+            <label for="message-text" class="control-label">Category: </label>
             @Html.DropDownListFor(model => model.CategoryId, Model.CategorySelectList)
         </div>
         <div class="form-group">

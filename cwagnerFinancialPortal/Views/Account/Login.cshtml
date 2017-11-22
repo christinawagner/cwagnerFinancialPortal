@@ -41,7 +41,7 @@
     </div>
     <div class="form-group m-b-0">
         <div class="col-sm-12 text-center">
-            @Html.ActionLink("Register as a new user", "Register", new { @class = "text-info m-l-5" })
+            @Html.ActionLink("Register as a new user", "Register", !string.IsNullOrWhiteSpace(ViewBag.ReturnUrl) ? new { ViewBag.ReturnUrl } : null , new { @class = "text-info m-l-5" })
         </div>
     </div>
 }

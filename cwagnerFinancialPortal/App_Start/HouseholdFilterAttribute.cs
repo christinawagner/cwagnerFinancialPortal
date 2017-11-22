@@ -11,7 +11,9 @@ namespace cwagnerFinancialPortal
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                if(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Household" && HttpContext.Current.User.Identity.GetHouseholdId() == null)
+                if(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName != "Household" 
+                    && HttpContext.Current.User.Identity.GetHouseholdId() == null
+                    && filterContext.ActionDescriptor.ActionName != "OverdraftNotification")
                 {
                     filterContext.Result = new RedirectToRouteResult(
                         new RouteValueDictionary

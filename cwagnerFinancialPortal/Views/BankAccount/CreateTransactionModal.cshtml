@@ -3,7 +3,7 @@
     ViewBag.Title = "CreateTransactionModalPartialView";
 }
 
-@using (Html.BeginForm("CreateTransaction", "BankAccount", FormMethod.Post))
+@using (Html.BeginForm("CreateTransaction", "BankAccount", FormMethod.Post, new { @class = "form-material form-horizontal" }))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -14,23 +14,20 @@
         @Html.HiddenFor(e => Model.BankAccountId)
 
         <div class="form-group">
-            <label for="message-text" class="control-label">Date of transaction:</label>
-            <input class="form-control" name="@nameof(Model.Date)" id="datepicker" type="text">
+            <input class="form-control" name="@nameof(Model.Date)" id="datepicker" type="text" placeholder="Date of transaction">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Transaction type:</label>
+            <label for="message-text" class="control-label">Transaction type: </label>
             @Html.EnumDropDownListFor(model => model.Type)
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Amount</label>
-            <input class="form-control" name="@nameof(Model.Amount)" id="message-text">
+            <input class="form-control" name="@nameof(Model.Amount)" id="message-text" placeholder="Amount">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Description</label>
-            <input class="form-control" name="@nameof(Model.Description)" id="message-text">
+            <input class="form-control" name="@nameof(Model.Description)" id="message-text" placeholder="Description">
         </div>
         <div class="form-group">
-            <label for="message-text" class="control-label">Category</label>
+            <label for="message-text" class="control-label">Category: </label>
             @Html.DropDownListFor(model => model.CategoryId, Model.CategorySelectList)
         </div>
         <div class="form-group">

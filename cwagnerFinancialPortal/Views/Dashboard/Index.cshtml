@@ -1,0 +1,90 @@
+﻿@model cwagnerFinancialPortal.Models.Dashboard.DashboardIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5>Budget: @Html.DropDownList("budget", Model.BudgetSelectList, new { id = "budgetSelect" })</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <br />
+                        <h5>Previous</h5>
+                        <div id="previousContainer">
+                            <canvas id="previous"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <h5>Current</h5>
+                        <div id="currentContainer">
+                            <canvas id="current"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+    <script>
+
+        $('#budgetSelect').change(function (val) {
+            GetGraphs($(this).val());
+        });
+
+        function GetGraphs(budgetId)
+        {
+            if (budgetId != null) {
+                var barGraphData = {};
+                var barChartsRequest = $.Deferred();
+                //var d2 = $.Deferred();
+                $.post('@Url.Action("GetBarChart")', { budgetId: budgetId }).done(function (r) {
+                    barGraphData = r;
+                    barChartsRequest.resolve();
+                })
+
+                $.when(barChartsRequest).done(function () {
+                    setupGraph("previous", first(barGraphData, function (x) { return x.name == "Previous" }));
+                    setupGraph("current", first(barGraphData, x => x.name == "Current"));
+                });
+            }
+
+        }
+
+        function first(arr, filter)
+        {
+            return $.grep(arr, filter)[0];
+        }
+
+        function setupGraph(id, data)
+        {
+            data.dataset
+            $('#' + id).remove();
+            $('#' + id + 'Container').append('<canvas id="' + id + '"></canvas>');
+            var ctx = document.getElementById(id).getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: data,
+
+                // Configuration options go here
+                options: {
+                }
+            });
+        }
+
+        $(function () {
+            GetGraphs($('#budgetSelect').val());
+        });
+    </script>
+
+}

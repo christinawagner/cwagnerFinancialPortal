@@ -1,4 +1,5 @@
 ﻿using cwagnerFinancialPortal.Domain.Users;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -39,7 +40,7 @@ namespace cwagnerFinancialPortal.Domain.Households
             db.SaveChanges();
         }
 
-        public void SendInvite(int householdId, string email)
+        public Guid AddInvite(int householdId, string email)
         {
             var invite = new HouseholdInvite
             {
@@ -48,10 +49,10 @@ namespace cwagnerFinancialPortal.Domain.Households
             };
             db.HouseholdInvites.Add(invite);
             db.SaveChanges();
-            //SEND EMAIL TO INVITEE
+            return invite.Id;
         }
 
-        public void AcceptInvite(Guid inviteId, string email)
+        public int AcceptInvite(Guid inviteId, string email)
         {
             var invite = db.HouseholdInvites.SingleOrDefault(i => i.Id == inviteId && i.InviteeEmail == email);
             var user = db.Users.SingleOrDefault(u => u.Email == email);
@@ -61,6 +62,7 @@ namespace cwagnerFinancialPortal.Domain.Households
                 db.SaveChanges();
             }
             //error handling
+            return invite.HouseholdId;
         }
 
         public void AddUserToHousehold(string userId, int householdId)

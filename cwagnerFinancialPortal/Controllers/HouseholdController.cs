@@ -1,28 +1,34 @@
 ﻿using cwagnerFinancialPortal.Domain;
 using cwagnerFinancialPortal.Domain.Households;
+using cwagnerFinancialPortal.Services;
 using cwagnerFinancialPortal.Extensions;
 using cwagnerFinancialPortal.Models;
 using cwagnerFinancialPortal.Models.Household;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Mail;
 
 namespace cwagnerFinancialPortal.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class HouseholdController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly HouseholdManager _manager;
+        private readonly EmailService _emailService;
 
         public HouseholdController()
         {
             _db = new ApplicationDbContext();
             _manager = new HouseholdManager(_db);
+            _emailService = new EmailService();
         }
 
         // GET: Household
@@ -52,6 +58,38 @@ namespace cwagnerFinancialPortal.Controllers
                 await AddHouseholdClaim(id, model.Name);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        public PartialViewResult InviteMemberModal()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SendInvite(string email)
+        {
+            var householdId = User.Identity.GetHouseholdId().Value;
+            var inviteId = _manager.AddInvite(householdId, email);
+
+            var inviteLink = Url.Action("AcceptInvite", "Household" , new { inviteId, email }, Request.Url.Scheme);
+            //send email with this link
+            await _emailService.SendAsync(new MailMessage("noreply@financialportal.com", email)
+            {
+                Subject = "You have a new household invite for FinancialPortal",
+                Body = $"Click the following link to accept the invite: <a href=\"{inviteLink}\">Invite</a>",
+                IsBodyHtml = true
+            });
+            TempData["Message"] = $"The invite has been successfully sent to {email}.";
+            return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> AcceptInvite(Guid inviteId, string email)
+        {
+            var householdId = _manager.AcceptInvite(inviteId, email);
+            var household = _manager.Get(householdId);
+            await AddHouseholdClaim(household.Id, household.Name);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

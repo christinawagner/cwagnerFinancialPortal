@@ -1,6 +1,6 @@
 ﻿@model cwagnerFinancialPortal.Models.Budget.CreateBudgetViewModel
 
-@using (Html.BeginForm("Create", "Budget", FormMethod.Post))
+@using (Html.BeginForm("Create", "Budget", FormMethod.Post, new { @class = "form-material form-horizontal" }))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -9,7 +9,7 @@
     <div class="modal-body">
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <label for="budget-name" class="control-label">Budget Duration:</label>
+            <label for="budget-name" class="control-label">Budget Duration: </label>
             @Html.EnumDropDownListFor(e => Model.Duration)
         </div>
         <div class="form-group">

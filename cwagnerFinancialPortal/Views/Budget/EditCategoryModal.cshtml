@@ -1,6 +1,6 @@
 ﻿@model cwagnerFinancialPortal.Models.Category.EditCategoryViewModel
 
-@using (Html.BeginForm("EditCategory", "Budget", FormMethod.Post))
+@using (Html.BeginForm("EditCategory", "Budget", FormMethod.Post, new { @class = "form-material form-horizontal" }))
 {
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -10,8 +10,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(e => Model.Id)
         <div class="form-group">
-            <label for="account-name" class="control-label">Category Name:</label>
-            @Html.EditorFor(e => Model.Name)
+            <input class="form-control" type="text" name="@nameof(Model.Name)" required="" value="@Model.Name">
         </div>
     </div>
     <div class="modal-footer">

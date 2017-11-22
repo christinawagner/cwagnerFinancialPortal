@@ -12,6 +12,8 @@ using cwagnerFinancialPortal.Domain;
 
 namespace cwagnerFinancialPortal.Controllers
 {
+    [Authorize]
+    [RequireHttps]
     public class BankAccountController : Controller
     {
         private readonly ApplicationDbContext _db;
