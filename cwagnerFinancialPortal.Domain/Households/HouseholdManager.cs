@@ -17,6 +17,7 @@ namespace cwagnerFinancialPortal.Domain.Households
         {
             db = dbContext;
         }
+
         public Household Get(int id)
         {
             return db.Households.Find(id);

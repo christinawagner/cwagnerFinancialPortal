@@ -202,9 +202,10 @@
     <Compile Include="Controllers\HouseholdController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Models\Dashboard\DashboardIndexViewModel.cs" />
+    <Compile Include="Models\Household\EditHouseholdViewModel.cs" />
     <Compile Include="Services\EmailService.cs" />
-    <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Controllers\Extensions\EnumExtensions.cs" />
+    <Compile Include="Controllers\Extensions\Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4227,6 +4228,7 @@
     <Content Include="Views\Home\_OverdraftNotification.cshtml" />
     <Content Include="Views\Household\InviteMemberModal.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Household\EditHouseholdModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

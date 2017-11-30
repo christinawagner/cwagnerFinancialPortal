@@ -98,6 +98,15 @@ namespace cwagnerFinancialPortal.Domain.BankAccounts
             var account = db.BankAccounts.Find(transaction.BankAccountId);
             var oldAmount = db.Transactions.Where(x => x.Id == transaction.Id).Select(s => s.Amount).Single();
 
+            if (transaction.Type == TransactionType.Debit)
+            {
+                transaction.Amount = transaction.Amount * -1;
+            }
+            else
+            {
+                transaction.Amount = Math.Abs(transaction.Amount);
+            }
+
             if (!db.Transactions.Local.Any(t => t.Id == transaction.Id))
             {
                 db.Transactions.Attach(transaction);

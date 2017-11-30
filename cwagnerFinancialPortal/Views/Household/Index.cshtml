@@ -12,17 +12,19 @@
                 @if (User.Identity.GetHouseholdId() != null)
                 {
                     <h4 class="card-title">@Model.Name</h4>
-                    <span class="card-subtitle">@Html.ActionLink("Invite Member", "InviteMemberModal", null, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</span>
+                        <span class="card-subtitle">@Html.ActionLink("Edit house name", "EditHouseholdModal", null, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</span>
+                        <br />
+                        <span class="card-subtitle">@Html.ActionLink("Invite Member", "InviteMemberModal", null, new { data_target = "#modal", data_toggle = "modal", data_remote = "true" })</span>
                     <p>Members:</p>
                     <ul>
-                        @foreach (var member in Model.Members)
+                        @foreach(var member in Model.Members)
                         {
                             <li>
                                 @member
                             </li>
                         }
                     </ul>
-                    
+
                 }
                 else
                 {

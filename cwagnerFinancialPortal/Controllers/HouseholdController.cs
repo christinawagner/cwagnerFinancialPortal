@@ -60,6 +60,33 @@ namespace cwagnerFinancialPortal.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //EDIT Household
+
+        public PartialViewResult EditHouseholdModal()
+        {
+            var householdName = User.Identity.GetHouseholdName();
+            var model = new EditHouseholdViewModel
+            {
+                Name = householdName
+            };
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditHousehold(EditHouseholdViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var householdId = User.Identity.GetHouseholdId().Value;
+                var household = _manager.Get(householdId);
+                household.Name = model.Name;
+                _manager.Edit(household);
+                await AddHouseholdClaim(household.Id, household.Name);                
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         public PartialViewResult InviteMemberModal()
         {
             return PartialView();

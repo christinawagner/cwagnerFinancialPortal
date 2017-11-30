@@ -11,7 +11,6 @@ namespace cwagnerFinancialPortal.Domain.Budgets
     {
         Weekly,
         Monthly,
-        Yearly
     }
 
     public class Budget
