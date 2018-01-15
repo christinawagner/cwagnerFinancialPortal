@@ -4152,6 +4152,7 @@
     <Content Include="connectionStrings.config" />
     <None Include="Properties\PublishProfiles\cwagner-budgeter - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\cwagner-budgeter - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\wagnerFinancialPortal - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
