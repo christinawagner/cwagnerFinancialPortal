@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cwagnerFinancialPortal.Domain.Households
 {
-    public class HouseholdManager
+    public class HouseholdManager : IHouseholdManager
     {
         private readonly ApplicationDbContext db;
 

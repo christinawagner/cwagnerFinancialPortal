@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace cwagnerFinancialPortal.Domain.Budgets
 {
-    public class BudgetManager
+    public class BudgetManager : IBudgetManager
     {
         private readonly ApplicationDbContext db;
 

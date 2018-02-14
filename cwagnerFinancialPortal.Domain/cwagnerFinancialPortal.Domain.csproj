@@ -56,12 +56,15 @@
     <Compile Include="BankAccounts\BankAccount.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="BankAccounts\BankAccountManager.cs" />
+    <Compile Include="BankAccounts\IBankAccountManager.cs" />
     <Compile Include="Budgets\Budget.cs" />
     <Compile Include="Budgets\BudgetItem.cs" />
     <Compile Include="Budgets\BudgetManager.cs" />
+    <Compile Include="Budgets\IBudgetManager.cs" />
     <Compile Include="Categories\DefaultCategories.cs" />
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\CategoryManager.cs" />
+    <Compile Include="Categories\ICategoryManager.cs" />
     <Compile Include="Chart\Chart.cs" />
     <Compile Include="Chart\ChartDataSet.cs" />
     <Compile Include="Email.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="Households\Household.cs" />
     <Compile Include="Households\HouseholdInvite.cs" />
     <Compile Include="Households\HouseholdManager.cs" />
+    <Compile Include="Households\IHouseholdManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transactions\Transaction.cs" />

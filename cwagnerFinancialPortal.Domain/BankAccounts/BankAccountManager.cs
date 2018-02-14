@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace cwagnerFinancialPortal.Domain.BankAccounts
 {
-    public class BankAccountManager
+    public class BankAccountManager : IBankAccountManager
     {
         private readonly ApplicationDbContext db;
 

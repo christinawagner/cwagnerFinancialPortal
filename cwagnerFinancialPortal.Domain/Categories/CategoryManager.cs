@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace cwagnerFinancialPortal.Domain.Categories
 {
-    public class CategoryManager
+    public class CategoryManager : ICategoryManager
     {
         private readonly ApplicationDbContext db;
 
